@@ -1,218 +1,309 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Gallery</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            padding: 0 200px;
-        }
-        /* Main Gallery Grid */
-        .image-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.2rem;
-            max-height: 400px;
-            padding: 1rem;
+        .traveler-selector {
             position: relative;
+            width: 250px;
+            font-family: Arial, sans-serif;
         }
-        
-        .image-gallery-main {
-            position: relative;
-            height: 400px;
-        }
-        
-        .image-gallery-main img {
+
+        .selector-bar {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-        
-        .image-gallery-thumbnail-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.2rem;
-        }
-        
-        .image-gallery-thumbnail-grid img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        
-        /* Image Count Icon */
-        .image-gallery-image-count {
-            position: absolute;
-            bottom: 1rem;
-            right: 1rem;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            cursor: pointer;
+            padding: 10px 15px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.3rem;
-        }
-        
-        /* Full Gallery View */
-        .image-gallery-full-view {
-            display: none;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 0.2rem;
-            padding: 1rem;
-            max-height: 80vh;
-            overflow-y: scroll;
-            position: relative;
-        }
-        
-        .image-gallery-full-view img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: white;
             cursor: pointer;
-            border-radius: 4px;
+            font-size: 14px;
         }
-        
-        /* Image Popup */
-        .image-gallery-popup {
+
+        .selector-bar:hover {
+            border-color: #007bff;
+        }
+
+        .dropdown-panel {
             display: none;
-            position: fixed;
-            top: 0;
+            position: absolute;
+            top: 100%;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            margin-top: 8px;
+            padding: 16px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .dropdown-panel.active {
+            display: block;
+        }
+
+        .traveler-type {
+            margin-bottom: 16px;
+        }
+
+        .traveler-type:last-child {
+            margin-bottom: 0;
+        }
+
+        .traveler-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .traveler-info h3 {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .traveler-info p {
+            margin: 4px 0 0;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .counter {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .counter-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
-            color: white;
-            padding: 1rem;
-            z-index: 100;
+            font-size: 16px;
+            line-height: 1;
         }
-        
-        .image-gallery-popup img {
-            max-width: 80%;
-            max-height: 80%;
-            border-radius: 8px;
+
+        .counter-btn:hover:not(:disabled) {
+            background: #f5f5f5;
         }
-        
-        .image-gallery-popup .image-gallery-title {
-            margin-top: 1rem;
-            font-size: 1.2rem;
+
+        .counter-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
-        
-        .image-gallery-popup-controls {
+
+        .counter-value {
+            min-width: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .chevron {
+            border: solid #666;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 3px;
+            transition: transform 0.2s;
+        }
+
+        .chevron.up {
+            transform: rotate(-135deg);
+        }
+
+        .chevron.down {
+            transform: rotate(45deg);
+        }
+
+        .done-section {
+            margin-top: 16px;
             display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
         }
-        
-        .image-gallery-popup-controls button {
-            background: none;
+
+        .done-section label {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            align-items: center;
+        }
+
+        .done-button {
+            padding: 6px 12px;
+            font-size: 14px;
             border: none;
+            border-radius: 8px;
+            background-color: #007bff;
             color: white;
-            font-size: 1.5rem;
             cursor: pointer;
+            width: 100%;
         }
-        
-        /* See Less Button */
-        .image-gallery-see-less {
-            margin-top: 1rem;
-            cursor: pointer;
-            color: blue;
-            text-decoration: underline;
+
+        .done-button:hover {
+
+            background-color: #0056b3;
         }
+
+        .traveler-checkbox{
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+
     </style>
 </head>
 <body>
+    <div class="traveler-selector">
+        <button class="selector-bar">
+            <span class="total-travelers">1 Traveler</span>
+            <span class="chevron down"></span>
+        </button>
+        
+        <div class="dropdown-panel">
+            <div class="traveler-type">
+                <div class="traveler-header">
+                    <div class="traveler-info">
+                        <h3>Adults</h3>
+                        <p>Age 13+</p>
+                    </div>
+                    <div class="counter">
+                        <button class="counter-btn" data-type="adults" data-action="decrease">-</button>
+                        <span class="counter-value adults-value">1</span>
+                        <button class="counter-btn" data-type="adults" data-action="increase">+</button>
+                    </div>
+                </div>
+            </div>
 
-<div class="image-gallery">
-    <div class="image-gallery-main">
-        <img src="./assets/exter.jpg" alt="Main Image">
-        <div class="image-gallery-image-count">
-            <i class="fas fa-images"></i> 30+
+            <div class="traveler-type">
+                <div class="traveler-header">
+                    <div class="traveler-info">
+                        <h3>Children</h3>
+                        <p>Age 0-12</p>
+                    </div>
+                    <div class="counter">
+                        <button class="counter-btn" data-type="children" data-action="decrease">-</button>
+                        <span class="counter-value children-value">0</span>
+                        <button class="counter-btn" data-type="children" data-action="increase">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="traveler-checkbox">
+                <label>
+                    <input type="checkbox" id="traveling-with-pets"> I am traveling with pets
+                </label>
+            </div>
+            <div>
+                <button class="done-button">Done</button>
+            </div>
+
+            <!-- <div class="done-section">
+                
+            </div> -->
         </div>
     </div>
-    <div class="image-gallery-thumbnail-grid">
-        <img src="./assets/living.jpg" alt="Thumbnail 1" data-title="Thumbnail 1">
-        <img src="./assets/living2.jpg" alt="Thumbnail 2" data-title="Thumbnail 2">
-        <img src="./assets/kitchen.jpg" alt="Thumbnail 3" data-title="Thumbnail 3">
-        <img src="./assets/bath.jpg" alt="Thumbnail 4" data-title="Thumbnail 4">
-    </div>
-</div>
 
-<div class="image-gallery-full-view">
-    <!-- Add 30 images for full view -->
-    <!-- Repeat with actual image sources -->
-    <img src="https://via.placeholder.com/150x100" alt="Full View Image 1" data-title="Full View Image 1">
-    <img src="https://via.placeholder.com/150x100" alt="Full View Image 2" data-title="Full View Image 2">
-    <!-- Add more images as needed -->
-    <span class="image-gallery-see-less">See Less</span>
-</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const selector = document.querySelector('.traveler-selector');
+            const selectorBar = selector.querySelector('.selector-bar');
+            const dropdownPanel = selector.querySelector('.dropdown-panel');
+            const chevron = selector.querySelector('.chevron');
+            const totalTravelersSpan = selector.querySelector('.total-travelers');
+            const doneButton = selector.querySelector('.done-button');
+            const petCheckbox = document.getElementById('traveling-with-pets');
 
-<!-- Image Popup for Viewing a Single Image -->
-<div class="image-gallery-popup">
-    <button class="image-gallery-close">&times;</button>
-    <img src="" alt="Popup Image">
-    <div class="image-gallery-title"></div>
-    <div class="image-gallery-popup-controls">
-        <button class="image-gallery-prev">&#10094;</button>
-        <button class="image-gallery-next">&#10095;</button>
-    </div>
-</div>
+            let counts = {
+                adults: 1,
+                children: 0
+            };
 
-<script>
-    // Handle Image Count Click to Show Full Gallery
-    document.querySelector('.image-gallery-image-count').addEventListener('click', function() {
-        document.querySelector('.image-gallery').style.display = 'none';
-        document.querySelector('.image-gallery-full-view').style.display = 'grid';
-    });
+            const limits = {
+                adults: { min: 1, max: 9 },
+                children: { min: 0, max: 9 }
+            };
 
-    // See Less Button to Hide Full Gallery
-    document.querySelector('.image-gallery-see-less').addEventListener('click', function() {
-        document.querySelector('.image-gallery').style.display = 'grid';
-        document.querySelector('.image-gallery-full-view').style.display = 'none';
-    });
+            function updateDisplay() {
+                // Update counter displays
+                selector.querySelector('.adults-value').textContent = counts.adults;
+                selector.querySelector('.children-value').textContent = counts.children;
 
-    // Popup Controls
-    const popup = document.querySelector('.image-gallery-popup');
-    const popupImage = popup.querySelector('img');
-    const popupTitle = popup.querySelector('.image-gallery-title');
-    let currentImageIndex = 0;
-    let images = Array.from(document.querySelectorAll('.image-gallery-thumbnail-grid img, .image-gallery-full-view img'));
+                // Update total in selector bar
+                const total = counts.adults + counts.children;
+                totalTravelersSpan.textContent = `${total} ${total === 1 ? 'Traveler' : 'Travelers'}`;
 
-    function showPopup(index) {
-        currentImageIndex = index;
-        popupImage.src = images[index].src;
-        popupTitle.textContent = images[index].getAttribute('data-title');
-        popup.style.display = 'flex';
-    }
+                // Update button states
+                updateButtonStates();
+            }
 
-    images.forEach((img, index) => {
-        img.addEventListener('click', () => showPopup(index));
-    });
+            function updateButtonStates() {
+                // Disable/enable buttons based on limits
+                selector.querySelectorAll('.counter-btn').forEach(btn => {
+                    const type = btn.dataset.type;
+                    const action = btn.dataset.action;
+                    
+                    if (action === 'decrease') {
+                        btn.disabled = counts[type] <= limits[type].min;
+                    } else {
+                        btn.disabled = counts[type] >= limits[type].max;
+                    }
+                });
+            }
 
-    document.querySelector('.image-gallery-close').addEventListener('click', () => {
-        popup.style.display = 'none';
-    });
+            // Toggle dropdown
+            selectorBar.addEventListener('click', () => {
+                dropdownPanel.classList.toggle('active');
+                chevron.classList.toggle('up');
+                chevron.classList.toggle('down');
+            });
 
-    document.querySelector('.image-gallery-prev').addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-        showPopup(currentImageIndex);
-    });
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!selector.contains(e.target)) {
+                    dropdownPanel.classList.remove('active');
+                    chevron.classList.remove('up');
+                    chevron.classList.add('down');
+                }
+            });
 
-    document.querySelector('.image-gallery-next').addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-        showPopup(currentImageIndex);
-    });
-</script>
+            // Handle counter buttons
+            selector.querySelectorAll('.counter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const type = btn.dataset.type;
+                    const action = btn.dataset.action;
+                    
+                    if (action === 'increase' && counts[type] < limits[type].max) {
+                        counts[type]++;
+                    } else if (action === 'decrease' && counts[type] > limits[type].min) {
+                        counts[type]--;
+                    }
+                    
+                    updateDisplay();
+                });
+            });
 
+            // Handle Done button click
+            doneButton.addEventListener('click', () => {
+                dropdownPanel.classList.remove('active');
+                chevron.classList.remove('up');
+                chevron.classList.add('down');
+
+                const petChecked = petCheckbox.checked;
+                console.log(`Traveling with pets: ${petChecked}`);
+            });
+
+            // Initial display update
+            updateDisplay();
+        });
+    </script>
 </body>
 </html>

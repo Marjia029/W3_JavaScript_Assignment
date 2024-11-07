@@ -208,9 +208,46 @@
                     <input type="text" class="date-input" placeholder="Start date" value="Nov 18">
                     <input type="text" class="date-input" placeholder="End date" value="Nov 20">
                 </div>
-                <select class="date-input">
-                    <option>2 travelers</option>
-                </select>
+ <!-- ===========================Traveler Selector======================================================================================================                -->
+                <div class="traveler-selector">
+                    <button class="selector-bar">
+                        <span class="total-travelers">1 Traveler</span>
+                        <span class="chevron down"></span>
+                    </button>
+                    
+                    <div class="dropdown-panel">
+                        <div class="traveler-type">
+                            <div class="traveler-header">
+                                <div class="traveler-info">
+                                    <h3>Adults</h3>
+                                    <p>Age 13+</p>
+                                </div>
+                                <div class="counter">
+                                    <button class="counter-btn" data-type="adults" data-action="decrease">-</button>
+                                    <span class="counter-value adults-value">1</span>
+                                    <button class="counter-btn" data-type="adults" data-action="increase">+</button>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="traveler-type">
+                            <div class="traveler-header">
+                                <div class="traveler-info">
+                                    <h3>Children</h3>
+                                    <p>Age 0-12</p>
+                                </div>
+                                <div class="counter">
+                                    <button class="counter-btn" data-type="children" data-action="decrease">-</button>
+                                    <span class="counter-value children-value">0</span>
+                                    <button class="counter-btn" data-type="children" data-action="increase">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
                 <div style="margin-top: 1rem;">
                     <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
                         <span>Total</span>

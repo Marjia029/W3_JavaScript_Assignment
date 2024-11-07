@@ -296,3 +296,85 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
+//============================================================ Traveler Selector ==========================================================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const selector = document.querySelector('.traveler-selector');
+    const selectorBar = selector.querySelector('.selector-bar');
+    const dropdownPanel = selector.querySelector('.dropdown-panel');
+    const chevron = selector.querySelector('.chevron');
+    const totalTravelersSpan = selector.querySelector('.total-travelers');
+
+    let counts = {
+        adults: 1,
+        children: 0
+    };
+
+    const limits = {
+        adults: { min: 1, max: 9 },
+        children: { min: 0, max: 9 }
+    };
+
+    function updateDisplay() {
+        // Update counter displays
+        selector.querySelector('.adults-value').textContent = counts.adults;
+        selector.querySelector('.children-value').textContent = counts.children;
+
+        // Update total in selector bar
+        const total = counts.adults + counts.children;
+        totalTravelersSpan.textContent = `${total} ${total === 1 ? 'Traveler' : 'Travelers'}`;
+
+        // Update button states
+        updateButtonStates();
+    }
+
+    function updateButtonStates() {
+        // Disable/enable buttons based on limits
+        selector.querySelectorAll('.counter-btn').forEach(btn => {
+            const type = btn.dataset.type;
+            const action = btn.dataset.action;
+            
+            if (action === 'decrease') {
+                btn.disabled = counts[type] <= limits[type].min;
+            } else {
+                btn.disabled = counts[type] >= limits[type].max;
+            }
+        });
+    }
+
+    // Toggle dropdown
+    selectorBar.addEventListener('click', () => {
+        dropdownPanel.classList.toggle('active');
+        chevron.classList.toggle('up');
+        chevron.classList.toggle('down');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!selector.contains(e.target)) {
+            dropdownPanel.classList.remove('active');
+            chevron.classList.remove('up');
+            chevron.classList.add('down');
+        }
+    });
+
+    // Handle counter buttons
+    selector.querySelectorAll('.counter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const type = btn.dataset.type;
+            const action = btn.dataset.action;
+            
+            if (action === 'increase' && counts[type] < limits[type].max) {
+                counts[type]++;
+            } else if (action === 'decrease' && counts[type] > limits[type].min) {
+                counts[type]--;
+            }
+            
+            updateDisplay();
+        });
+    });
+
+    // Initial display update
+    updateDisplay();
+});
