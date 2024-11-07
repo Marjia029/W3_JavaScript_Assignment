@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            padding: 0 200px;
+        }
+        /* Main Gallery Grid */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.2rem;
+            max-height: 400px;
+            padding: 1rem;
+            position: relative;
+        }
+        
+        .image-gallery-main {
+            position: relative;
+            height: 400px;
+        }
+        
+        .image-gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .image-gallery-thumbnail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.2rem;
+        }
+        
+        .image-gallery-thumbnail-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        /* Image Count Icon */
+        .image-gallery-image-count {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        /* Full Gallery View */
+        .image-gallery-full-view {
+            display: none;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.2rem;
+            padding: 1rem;
+            max-height: 80vh;
+            overflow-y: scroll;
+            position: relative;
+        }
+        
+        .image-gallery-full-view img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        /* Image Popup */
+        .image-gallery-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            padding: 1rem;
+            z-index: 100;
+        }
+        
+        .image-gallery-popup img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 8px;
+        }
+        
+        .image-gallery-popup .image-gallery-title {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .image-gallery-popup-controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .image-gallery-popup-controls button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* See Less Button */
+        .image-gallery-see-less {
+            margin-top: 1rem;
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="image-gallery">
+    <div class="image-gallery-main">
+        <img src="./assets/exter.jpg" alt="Main Image">
+        <div class="image-gallery-image-count">
+            <i class="fas fa-images"></i> 30+
+        </div>
+    </div>
+    <div class="image-gallery-thumbnail-grid">
+        <img src="./assets/living.jpg" alt="Thumbnail 1" data-title="Thumbnail 1">
+        <img src="./assets/living2.jpg" alt="Thumbnail 2" data-title="Thumbnail 2">
+        <img src="./assets/kitchen.jpg" alt="Thumbnail 3" data-title="Thumbnail 3">
+        <img src="./assets/bath.jpg" alt="Thumbnail 4" data-title="Thumbnail 4">
+    </div>
+</div>
+
+<div class="image-gallery-full-view">
+    <!-- Add 30 images for full view -->
+    <!-- Repeat with actual image sources -->
+    <img src="https://via.placeholder.com/150x100" alt="Full View Image 1" data-title="Full View Image 1">
+    <img src="https://via.placeholder.com/150x100" alt="Full View Image 2" data-title="Full View Image 2">
+    <!-- Add more images as needed -->
+    <span class="image-gallery-see-less">See Less</span>
+</div>
+
+<!-- Image Popup for Viewing a Single Image -->
+<div class="image-gallery-popup">
+    <button class="image-gallery-close">&times;</button>
+    <img src="" alt="Popup Image">
+    <div class="image-gallery-title"></div>
+    <div class="image-gallery-popup-controls">
+        <button class="image-gallery-prev">&#10094;</button>
+        <button class="image-gallery-next">&#10095;</button>
+    </div>
+</div>
+
+<script>
+    // Handle Image Count Click to Show Full Gallery
+    document.querySelector('.image-gallery-image-count').addEventListener('click', function() {
+        document.querySelector('.image-gallery').style.display = 'none';
+        document.querySelector('.image-gallery-full-view').style.display = 'grid';
+    });
+
+    // See Less Button to Hide Full Gallery
+    document.querySelector('.image-gallery-see-less').addEventListener('click', function() {
+        document.querySelector('.image-gallery').style.display = 'grid';
+        document.querySelector('.image-gallery-full-view').style.display = 'none';
+    });
+
+    // Popup Controls
+    const popup = document.querySelector('.image-gallery-popup');
+    const popupImage = popup.querySelector('img');
+    const popupTitle = popup.querySelector('.image-gallery-title');
+    let currentImageIndex = 0;
+    let images = Array.from(document.querySelectorAll('.image-gallery-thumbnail-grid img, .image-gallery-full-view img'));
+
+    function showPopup(index) {
+        currentImageIndex = index;
+        popupImage.src = images[index].src;
+        popupTitle.textContent = images[index].getAttribute('data-title');
+        popup.style.display = 'flex';
+    }
+
+    images.forEach((img, index) => {
+        img.addEventListener('click', () => showPopup(index));
+    });
+
+    document.querySelector('.image-gallery-close').addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+
+    document.querySelector('.image-gallery-prev').addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        showPopup(currentImageIndex);
+    });
+
+    document.querySelector('.image-gallery-next').addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        showPopup(currentImageIndex);
+    });
+</script>
+
+</body>
+</html>

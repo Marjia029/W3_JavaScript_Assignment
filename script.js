@@ -194,3 +194,105 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// ================================================================ Image Gllery ==========================================================================
+document.addEventListener("DOMContentLoaded", function () {
+    const thumbnails = document.querySelectorAll(".image-gallery-thumbnail");
+    const popup = document.getElementById("image-gallery-popup");
+    const popupImage = document.getElementById("image-gallery-popup-image");
+    const popupTitle = document.getElementById("image-gallery-title");
+    const popupCounter = document.getElementById("image-gallery-counter");
+    const closeButton = document.getElementById("image-gallery-close");
+    const prevButton = document.getElementById("image-gallery-prev");
+    const nextButton = document.getElementById("image-gallery-next");
+    const fullGalleryView = document.querySelector(".image-gallery-full-view");
+    const imageCountIcon = document.querySelector(".image-gallery-image-count");
+
+    let currentIndex = 0;
+    const images = Array.from(thumbnails);
+
+    function openPopup(index) {
+        currentIndex = index;
+        const currentImage = images[currentIndex];
+        popupImage.src = currentImage.src;
+        popupTitle.textContent = currentImage.getAttribute("data-title");
+        popupCounter.textContent = `${currentIndex + 1}/${images.length}`;
+        popup.style.display = "flex";
+    }
+
+    function closePopup() {
+        popup.style.display = "none";
+    }
+
+    function showNextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        openPopup(currentIndex);
+    }
+
+    function showPrevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        openPopup(currentIndex);
+    }
+
+    function openFullGallery() {
+        fullGalleryView.innerHTML = ""; // Clear any previous images
+
+        images.forEach((image, index) => {
+            const fullImage = document.createElement("img");
+            fullImage.src = image.src;
+            fullImage.alt = image.alt;
+            fullImage.dataset.title = image.getAttribute("data-title");
+
+            fullImage.addEventListener("click", () => openPopup(index));
+            
+            // Show title under each image
+            const title = document.createElement("div");
+            title.textContent = image.getAttribute("data-title");
+            title.style.color = "white";
+            title.style.textAlign = "center";
+            title.style.fontSize = "14px";
+            title.style.marginTop = "4px";
+            
+            const container = document.createElement("div");
+            container.appendChild(fullImage);
+            container.appendChild(title);
+
+            fullGalleryView.appendChild(container);
+        });
+
+        // Add "See Less" button
+        const seeLessButton = document.createElement("div");
+        seeLessButton.classList.add("image-gallery-see-less");
+        seeLessButton.textContent = "See Less";
+        seeLessButton.addEventListener("click", closeFullGallery);
+
+        fullGalleryView.appendChild(seeLessButton);
+
+        document.querySelector(".image-gallery").style.display = "none";
+        fullGalleryView.style.display = "grid";
+    }
+
+    function closeFullGallery() {
+        fullGalleryView.style.display = "none";
+        document.querySelector(".image-gallery").style.display = "grid";
+    }
+
+    thumbnails.forEach((thumbnail, index) => {
+        thumbnail.addEventListener("click", () => openPopup(index));
+    });
+
+    closeButton.addEventListener("click", closePopup);
+    nextButton.addEventListener("click", showNextImage);
+    prevButton.addEventListener("click", showPrevImage);
+
+    imageCountIcon.addEventListener("click", openFullGallery); // Show full gallery on click
+
+    document.addEventListener("keydown", function (event) {
+        if (popup.style.display === "flex") {
+            if (event.key === "Escape") closePopup();
+            if (event.key === "ArrowRight") showNextImage();
+            if (event.key === "ArrowLeft") showPrevImage();
+        }
+    });
+});
+

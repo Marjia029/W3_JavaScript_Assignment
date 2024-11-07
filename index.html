@@ -36,22 +36,37 @@
             <button id="save-button"><a href="#" ><i class="fa-regular fa-heart" id="heart-icon"></i> Save</a></button>
         </div>
     </div>
-
+<!-- =======================================================Image Gallery============================================================ -->
     <div class="image-gallery">
-        <div class="main-image">
-            <img src="./assets/exter2.jpg" alt="Deck view of lake">
-            <div class="image-count">
-                <i class="fas fa-images"></i>
-                30+
+        <div class="image-gallery-main-image">
+            <img src="./assets/exter.jpg" alt="Image 1" class="image-gallery-thumbnail" data-title="Juneau Vacation Rental | 2BR | 1BA | 1,115 Sq Ft | Stairs Required">
+            <div class="image-gallery-image-count">
+                <i class="fas fa-images"></i> 30+
             </div>
         </div>
-        <div class="thumbnail-grid">
-            <img src="./assets/living.jpg" alt="House exterior">
-            <img src="./assets/living2.jpg" alt="Living room">
-            <img src="./assets/kitchen.jpg" alt="Interior view">
-            <img src="./assets/bath.jpg" alt="Another interior view">
+        <div class="image-gallery-thumbnail-grid">
+            <img src="./assets/living.jpg" alt="Image 2" class="image-gallery-thumbnail" data-title="Living Room View">
+            <img src="./assets/living2.jpg" alt="Image 3" class="image-gallery-thumbnail" data-title="Kitchen View">
+            <img src="./assets/kitchen.jpg" alt="Image 4" class="image-gallery-thumbnail" data-title="Bedroom View">
+            <img src="./assets/bath.jpg" alt="Image 5" class="image-gallery-thumbnail" data-title="Bathroom View">
         </div>
     </div>
+
+    <div id="image-gallery-popup" class="image-gallery-popup">
+        <span id="image-gallery-close" class="image-gallery-close">&times;</span>
+        <img id="image-gallery-popup-image" class="image-gallery-popup-image" src="" alt="">
+        <div id="image-gallery-title" class="image-gallery-title"></div>
+        <div id="image-gallery-counter" class="image-gallery-counter"></div>
+        <button id="image-gallery-prev" class="image-gallery-nav">&larr;</button>
+        <button id="image-gallery-next" class="image-gallery-nav">&rarr;</button>
+    </div>
+
+    <!-- Full Gallery View Container -->
+    <div class="image-gallery-full-view" style="display: none;">
+        <!-- JavaScript will populate this section with all images -->
+    </div>
+
+
 
 
     <div class="tabs">
