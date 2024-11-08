@@ -305,6 +305,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const dropdownPanel = selector.querySelector('.dropdown-panel');
     const chevron = selector.querySelector('.chevron');
     const totalTravelersSpan = selector.querySelector('.total-travelers');
+    const doneButton = selector.querySelector('.done-button');
+    const petCheckbox = document.getElementById('traveling-with-pets');
 
     let counts = {
         adults: 1,
@@ -373,6 +375,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             updateDisplay();
         });
+    });
+
+    // Handle Done button click
+    doneButton.addEventListener('click', () => {
+        dropdownPanel.classList.remove('active');
+        chevron.classList.remove('up');
+        chevron.classList.add('down');
+
+        const petChecked = petCheckbox.checked;
+        console.log(`Traveling with pets: ${petChecked}`);
     });
 
     // Initial display update
