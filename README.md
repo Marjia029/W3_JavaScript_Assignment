@@ -66,4 +66,4 @@ To get a local copy up and running, follow these steps.
    ```bash
    git clone https://github.com/Marjia029/W3_JavaScript_Assignment.git
    cd W3_JavaScript_Assignment
-2. **Open [index.html](./index.html) file with web browser or [Click here](https://marjia029.github.io/HTML_CSS_Assignment/) to see the webpage.**
+2. **Open [index.html](./index.html) file with web browser or [Click here](https://marjia029.github.io/W3_JavaScript_Assignment/) to see the webpage.**
