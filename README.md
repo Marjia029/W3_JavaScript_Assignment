@@ -2,7 +2,7 @@
 
 
 
-# 🏡 Vacation Home Rental Landing Page
+# 🏡 Vacation Home Rental Landing Page Interactive
 
 A responsive and modern landing page for vacation home rentals. This project provides an attractive and functional interface for users to browse properties, check amenities, view house rules, and make bookings.
 
