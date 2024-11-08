@@ -1,3 +1,25 @@
+//========================================Navbar================================
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    const closeNav = document.getElementById('close-nav');
+
+    // Open the mobile nav
+    menuToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        mobileNav.style.display = 'flex';
+    });
+
+    // Close the mobile nav
+    closeNav.addEventListener('click', () => {
+        mobileNav.style.display = 'none';
+    });
+} );
+
+
+
+
+//==========================================Region-Selector================================
 document.addEventListener('DOMContentLoaded', function() {
     const regionSelector = document.getElementById('region-selector');
     const settingsPopup = document.getElementById('settings-popup');
@@ -120,10 +142,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-
-
-
 
 //Save icon State Management
 

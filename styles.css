@@ -20,13 +20,30 @@ header {
     
 }
 
+/* ========================================Nav-bar-styling========================================= */
+.nav-container {
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    margin-left: auto;
+}
+
+#close-nav{
+    display: none;
+}
+
 .nav-links {
     display: flex;
     gap: 1.5rem;
-    margin-left: auto;
+    
 }
  .nav-icon {
     display: none;
+    
+}
+.nav-icon .fas-user-circle{
+    font-size: 40px;
+    color: black;
 }
 
 .nav-links button {
@@ -49,6 +66,8 @@ header {
     color: red;
     
 }
+
+/* ========================================Nav-bar-styling-end========================================= */
 
 .some-link {
     padding: 1rem;
@@ -84,6 +103,12 @@ header {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+.share-open-popup img{
+    height: 20px;
+    width: 20px;
+    display: none;
 }
 
 /* =================================================image-gallery========================================= */
@@ -268,8 +293,7 @@ header {
     margin-bottom: 5rem;
 }
 
-.property-details h1 {
-    font-size: 1.8rem;
+.property-details  title {
     margin-bottom: 1rem;
 }
 
@@ -728,14 +752,14 @@ header {
 
 
 .property-description {
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 /* .section {
     margin-bottom: 25px;
 } */
 
-.section p {
+.section p, .property-description p {
     margin: 18px 0;
 }
 
@@ -1256,7 +1280,69 @@ h2 {
         display: none;
     }
 
-    .nav-links {
+
+    /* ========================================Nav-bar====================================== */
+    
+    .nav-container .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        height: 100%;
+        background-color: #fff;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        padding: 20px;
+        z-index: 100;
+    }
+
+    /* Show the nav icon on mobile */
+    .nav-icon {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        cursor: pointer;
+    }
+
+    .nav-icon i {
+        font-size: 28px;
+        color: #333;
+    }
+
+    /* Styling for the close button */
+    #close-nav {
+        display: flex;
+        align-self: flex-end;
+        background: none;
+        border: none;
+        font-size: 28px;
+        cursor: pointer;
+        margin-bottom: 20px;
+    }
+
+    /* Mobile nav links */
+    .nav-container .nav-links a {
+        font-size: 18px;
+        color: #333;
+        padding: 12px 0;
+        text-decoration: none;
+        border-bottom: 1px solid #ddd;
+        width: 100%;
+    }
+
+    /* Active state for the mobile nav links */
+    .nav-container .nav-links a:hover {
+        color: #007bff;
+    }
+    /* ====================================================Navbar-end================================ */
+
+    /* ========================================Region Selector pop up============================== */
+    .settings-popup{
+        max-width: 300px;
+    }
+
+    /* .nav-links {
         display: none;
     }
     .nav-icon{
@@ -1264,11 +1350,57 @@ h2 {
         align-items: center;
         text-decoration: none;
         margin-left: auto;
-    }
+        
+    } */
 
     .some-link .nav-links{
         display: block;
     }
+
+   /* ==========================================tabs overlap================================== */
+   .image-gallery {
+    position: relative;
+    }
+
+    .some-link {
+        position: absolute;
+        top: 70px;
+        left: 20px;
+        right: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10;
+        padding: 5px;
+        background: transparent; /* Optional for better visibility */
+        color: #fff;
+        border-radius: 8px;
+    }
+
+    .some-link a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .some-link  .nav-links {
+        display: flex;
+        gap: 10px;
+    }
+
+    .some-link .nav-links button {
+        background: transparent;
+        border: none;
+        background-color: white;
+        color: #fff;
+    }
+
+    .share-open-popup img {
+        display: flex;
+    }
+    .share-open-popup i,p{
+        display: none;
+    }
+   /* ==========================================tabs overlap-end================================== */
 
     .features {
         grid-template-columns: 1fr;
@@ -1426,6 +1558,32 @@ h2 {
         background-color: white;
         border: 2px solid black;
     }
+
+    /* ===============================share-pop-up================================= */
+    .share-popup{
+        width: 60%;
+        max-width: 300px;
+    }
+    .share-options {
+        display: flex;
+        flex-direction: column; /* Stack options vertically */
+        gap: 12px;
+    }
+
+    .share-option {
+        flex: 1;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    /* ===============================share-pop-up-end================================= */
 
 }
 

@@ -10,17 +10,19 @@
 </head>
 <body>
     <header>
-        <div class="nav-links">
-            <a href="#" id="region-selector"><i class="fas fa-globe-americas"></i>United States</a>
-            <a href="#">Trip Boards</a>
-            <a href="#">List your property</a>
-            <a href="#">Help</a>
-            <a href="#">My Trip</a>
-            <a href="#">sign in</a>
-            
-        </div>
-        <div class="nav-icon">   
-            <a href="#" ><i class="fas fa-user-circle"></i></a>
+        <div class="nav-container">
+            <div class="nav-icon">  
+                <a href="#" id="menu-toggle"><i class="fas fa-user-circle"></i></a>
+            </div>
+            <div class="nav-links" id="mobile-nav">
+                <button id="close-nav">&times;</button>
+                <a href="#" id="region-selector"><i class="fas fa-globe-americas"></i> United States</a>
+                <a href="#">Trip Boards</a>
+                <a href="#">List your property</a>
+                <a href="#">Help</a>
+                <a href="#">My Trip</a>
+                <a href="#">Sign in</a>
+            </div>
         </div>
         
     </header>
@@ -32,8 +34,8 @@
         </a>
         <!-- share and save links -->
         <div class="nav-links">
-            <button class="share-open-popup"><a href="#"><i class="fas fa-share"></i> Share</a></button>
-            <button id="save-button"><a href="#" ><i class="fa-regular fa-heart" id="heart-icon"></i> Save</a></button>
+            <button class="share-open-popup"><a href="#"><i class="fas fa-share"></i><p>Share</p><img src="./assets/property-manager/alternate-share.svg" alt=""></a></button>
+            <button id="save-button"><a href="#" ><i class="fa-regular fa-heart" id="heart-icon"></i> <p>Save</p></a></button>
         </div>
     </div>
 <!-- =======================================================Image Gallery============================================================ -->
@@ -333,11 +335,11 @@
         <!-- Description  -->
 
         <div class="description-section">
-            <h1>About this property</h1>
+            <div class="title">About this property</div>
     
             <div class="property-description">
                 Mountain View Retreat: Scenic Escape + Forest Access
-                
+
                 <p>Welcome to our peaceful mountain sanctuary! This charming 2-bedroom, 1-bath home offers the perfect blend of comfort and natural beauty. Nestled in the heart of pristine wilderness, you'll find yourself surrounded by towering pines and breathtaking mountain vistas. Spend your days exploring nearby hiking trails, wildlife watching, or simply relaxing on the private deck.</p>
             </div>
 
