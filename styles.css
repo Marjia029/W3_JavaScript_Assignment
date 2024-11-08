@@ -1283,7 +1283,7 @@ h2 {
 
     /* ========================================Nav-bar====================================== */
     
-    .nav-container .nav-links {
+    /* .nav-container .nav-links {
         display: none;
         position: fixed;
         top: 0;
@@ -1295,13 +1295,30 @@ h2 {
         flex-direction: column;
         padding: 20px;
         z-index: 100;
+    } */
+    .nav-container .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        height: 100%;
+        background-color: #fff;
+        flex-direction: column;
+        padding: 20px;
+        z-index: 100;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
     }
 
-    /* Show the nav icon on mobile */
+    /* Visible class to show the mobile nav */
+    .nav-container .nav-links.visible {
+        display: flex;
+    }
+
+    /* Mobile nav icon styling */
     .nav-icon {
         display: flex;
         align-items: center;
-        margin-left: auto;
         cursor: pointer;
     }
 
@@ -1310,7 +1327,7 @@ h2 {
         color: #333;
     }
 
-    /* Styling for the close button */
+    /* Close button styling */
     #close-nav {
         display: flex;
         align-self: flex-end;
@@ -1338,9 +1355,7 @@ h2 {
     /* ====================================================Navbar-end================================ */
 
     /* ========================================Region Selector pop up============================== */
-    .settings-popup{
-        max-width: 300px;
-    }
+    
 
     /* .nav-links {
         display: none;

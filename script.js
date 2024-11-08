@@ -1,20 +1,39 @@
 //========================================Navbar================================
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const menuToggle = document.getElementById('menu-toggle');
     const mobileNav = document.getElementById('mobile-nav');
     const closeNav = document.getElementById('close-nav');
 
-    // Open the mobile nav
+    // Toggle mobile nav visibility
     menuToggle.addEventListener('click', (e) => {
         e.preventDefault();
-        mobileNav.style.display = 'flex';
+        mobileNav.classList.add('visible');
     });
 
     // Close the mobile nav
     closeNav.addEventListener('click', () => {
-        mobileNav.style.display = 'none';
+        mobileNav.classList.remove('visible');
     });
-} );
+
+    // Handle window resize
+    function handleResize() {
+        if (window.innerWidth > 768) {
+            mobileNav.classList.remove('visible');
+            mobileNav.style.display = 'flex';
+        } else {
+            mobileNav.style.display = '';
+        }
+    }
+
+    // Listen for window resize events
+    window.addEventListener('resize', handleResize);
+
+    // Initialize navbar visibility
+    handleResize();
+});
+
+
+
 
 
 
