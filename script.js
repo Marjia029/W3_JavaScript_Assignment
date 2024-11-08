@@ -33,11 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-
-
-
-
 //==========================================Region-Selector================================
 document.addEventListener('DOMContentLoaded', function() {
     const regionSelector = document.getElementById('region-selector');

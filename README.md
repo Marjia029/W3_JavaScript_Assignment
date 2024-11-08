@@ -1,4 +1,4 @@
-# HTML-CSS ASSIGNMENT
+# JavaScript ASSIGNMENT
 
 
 
@@ -28,7 +28,12 @@ The **Vacation Home Rental Landing Page** is designed to showcase properties ava
 This project is suitable for anyone looking to develop a vacation rental or property listing platform, or for learning HTML, CSS, and JavaScript basics in a responsive design.
 
 ## Features
-
+- ☰ **Responsive Navbar** - Navbar is Hiddine in mobile view. It pops up clicking user icon.
+- 🌍 **Responsive Region and Currency Selection** - User can select region and currency of their choice.
+- ➦ **Responsive Share and Copy Link Options** - User can Copy link and share the content.
+- 📂 **Save Option** - User can save the content and the state is not change on reloading the webpage.
+- 🖼️ **Full Gallery and Image View** - User can see the full image gallery and full image from the gallery. They can also see the previous image and next image from the full image view.
+- 👨‍👩‍👦‍👦 **Travelers Selection** - User can select the desire number of travelers to book the rooms and see the pricing. The least number of travelers is set to 1 adults.
 - 🏠 **Property Listings** - Showcase various properties with images and descriptions.
 - 🔍 **Search Functionality** - Users can filter properties by location, dates, and number of guests.
 - 📅 **Availability Calendar** - Integrated calendar to display booking availability.
@@ -41,6 +46,7 @@ This project is suitable for anyone looking to develop a vacation rental or prop
 
 - **HTML5** - Semantic structure and layout
 - **CSS3** - Styling and animations
+- **JavaScript** - Adding Functionality
 - **Font Awesome** - Icon library for amenities and other features
 - **Google Maps API** - For displaying property locations on a map
 
@@ -58,6 +64,6 @@ To get a local copy up and running, follow these steps.
 
 1. **Clone the repo:**
    ```bash
-   git clone https://github.com/Marjia029/HTML_CSS_Assignment.git
-   cd HTML_CSS_Assignment
-2. **Open [index.html](/index.html) file with web browser or [Click here](https://marjia029.github.io/HTML_CSS_Assignment/) to see the webpage.**
+   git clone https://github.com/Marjia029/W3_JavaScript_Assignment.git
+   cd W3_JavaScript_Assignment
+2. **Open [index.html](./index.html) file with web browser or [Click here](https://marjia029.github.io/HTML_CSS_Assignment/) to see the webpage.**

@@ -224,18 +224,32 @@ header {
 }
 
 #image-gallery-prev {
+    font-size: 30px;
+    font-weight: 600;
+    color: black;
     left: 20px;
+    background-color: white;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
 }
 
 #image-gallery-next {
     right: 20px;
+    background-color: white;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 600;
+    color: black;
 }
 
 .image-gallery-full-view {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* Adjust columns as needed */
     gap: 0.5rem;
-    padding: 1rem;
+    padding: 2rem;
     background: rgba(0, 0, 0, 0.8);
     position: fixed;
     top: 0;
@@ -268,6 +282,7 @@ header {
 
 
 .tabs {
+    margin-top: 3px;
     display: flex;
     gap: 2rem;
     padding: 1rem;
@@ -324,7 +339,7 @@ header {
     color: #666;
     width: 20px;
 }
-
+/*=========================================booking-card==========================================*/
 .booking-card {
     background: white;
     border: 1px solid #e5e5e5;
@@ -340,18 +355,41 @@ header {
 }
 
 .date-picker {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    display: flex;
+    gap: 1rem;
     margin: 1rem 0;
 }
 
-.date-input {
-    padding: 0.8rem;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    width: 100%;
+.date-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
+
+.date-input {
+    padding: 0.5rem 0.5rem 0.5rem 2rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 150px;
+}
+
+.date-input::placeholder {
+    color: #999;
+}
+
+.date-input:focus {
+    outline: none;
+    border-color: #0066ff;
+}
+
+.date-input-container i {
+    position: absolute;
+    left: 10px;
+    color: #666;
+    font-size: 18px;
+}
+
 /* =========================================================Traveler Selector======================================================================= */
 .traveler-selector {
     position: relative;
@@ -912,7 +950,7 @@ header {
 /* House Rule Section */
 
 
-.house-rule-section, .damage-section, .cancellation-section, .important-info, .faq-section, .rating-section, .host-section, .demo, .languages-main, .send-a-msg {
+.house-rule-section, .damage-section, .cancellation-section, .important-info, .faq-section, .rating-section, .host-section, .demo,  .send-a-msg {
     margin-top: 2rem;
     display: grid;
     grid-column: 1/-1;
@@ -934,6 +972,8 @@ h2 {
     font-size: 22px;
     color: #222;
     margin-bottom: 24px;
+    /* margin-bottom: 16px; */
+    font-weight: 600;
 }
 
 .check-times {
@@ -1113,11 +1153,7 @@ h2 {
     margin-bottom: 40px;
   }
 
-  h2 {
-    font-size: 22px;
-    margin-bottom: 16px;
-    font-weight: 600;
-  }
+ 
 
   .important-info ul {
     list-style: none;
@@ -1236,12 +1272,6 @@ h2 {
     white-space: nowrap;
   }
 
-
-
-  .languages-main {
-    margin-top: 2 rem;
-  }
-
   .rating-section-main{
     display: grid;
     gap: 2rem;
@@ -1250,12 +1280,6 @@ h2 {
 
   }
 
-/* @media (max-width: 768px) {
-    .room-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-} */
 
 @media (max-width: 768px) {
     body {
@@ -1270,8 +1294,6 @@ h2 {
         grid-template-columns: 1fr;
     }
 
-
-
     .content {
         grid-template-columns: 1fr;
     }
@@ -1280,22 +1302,31 @@ h2 {
         display: none;
     }
 
-
-    /* ========================================Nav-bar====================================== */
+    #image-gallery-prev {
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+        left: 20px;
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+        justify-content: center;
+        align-items: center;
+    }
     
-    /* .nav-container .nav-links {
-        display: none;
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 80%;
-        height: 100%;
-        background-color: #fff;
-        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-        flex-direction: column;
-        padding: 20px;
-        z-index: 100;
-    } */
+    #image-gallery-next {
+        right: 20px;
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+    }
+    
+
+
+    /* ========================================Nav-bar====================================== */  
     .nav-container .nav-links {
         display: none;
         position: fixed;
@@ -1356,17 +1387,16 @@ h2 {
 
     /* ========================================Region Selector pop up============================== */
     
-
-    /* .nav-links {
-        display: none;
+    .settings-popup {
+        width: 90%;
+        max-width: 300px;
     }
-    .nav-icon{
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        margin-left: auto;
-        
-    } */
+
+    .popup-content p {
+        display: inline;
+        font-size: 0.9rem; /* Slightly smaller font for mobile view */
+    }
+   
 
     .some-link .nav-links{
         display: block;
@@ -1376,6 +1406,8 @@ h2 {
    .image-gallery {
     position: relative;
     }
+
+
 
     .some-link {
         position: absolute;
@@ -1417,6 +1449,17 @@ h2 {
     }
    /* ==========================================tabs overlap-end================================== */
 
+    /* ================================Sign-in-card======================================== */
+    .signin-card {
+        flex-direction: row; /* Row layout for desktop view */
+    }
+    .signin-content p {
+        display: flex;
+        margin: 0;
+        font-size: 1rem;
+        color: #fff; /* Light gray for better contrast */
+    }
+
     .features {
         grid-template-columns: 1fr;
     }
@@ -1431,6 +1474,10 @@ h2 {
     .house-rule-section, .damage-section, .cancellation-section, .important-info, .faq-section, .demo, .host-section, .send-a-msg{
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+    .host-des p{
+        display: inline;
+        
     }
 
     .cancellation-section .timeline-container{
@@ -1612,11 +1659,13 @@ h2 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
+    width: 90%; /* Adjust width for mobile view */
+    max-width: 400px;
     background: white;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
 .popup-header {
@@ -1641,9 +1690,18 @@ h2 {
     color: #666;
 }
 
+/* Adjust padding for mobile view */
 .popup-content {
-    padding: 20px;
+    padding: 16px;
 }
+
+/* Ensure text is fully visible */
+.popup-content p {
+    font-size: 1rem;
+    color: #333; /* Ensure text color is dark enough */
+    word-wrap: break-word; /* Prevent text from overflowing */
+}
+
 
 .warning-message {
     display: flex;
